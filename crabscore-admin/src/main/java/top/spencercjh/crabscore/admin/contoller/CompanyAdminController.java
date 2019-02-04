@@ -51,14 +51,14 @@ public class CompanyAdminController {
         }
     }
 
-    @GetMapping(value = "/companies/{pageNum}/{pageSize}")
+    @GetMapping(value = "/companies")
     @ApiOperation("查询所有参选单位")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有参选单位成功"),
             @ApiResponse(code = 201, message = "companyList列表为空")})
-    public Result<Object> allCompany(@ApiParam(name = "pageNum", value = "页数", type = "Integer")
-                                     @PathVariable("pageNum") Integer pageNum,
-                                     @ApiParam(name = "pageSize", value = "页面大小", type = "Integer")
-                                     @PathVariable("pageSize") Integer pageSize) {
+    public Result<Object> allCompany(@ApiParam(name = "pageNum", value = "页数", type = "Integer", defaultValue = "1")
+                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                     @ApiParam(name = "pageSize", value = "页面大小", type = "Integer", defaultValue = "10")
+                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<Company> companyList = this.companyService.selectAllCompany(pageNum, pageSize);
         if (companyList.size() == 0) {
             return new ResultUtil<>().setSuccessMsg(201, "companyList列表为空");
@@ -78,10 +78,10 @@ public class CompanyAdminController {
                                    @PathVariable("competitionId") Integer competitionId,
                                    @ApiParam(name = "companyId", value = "参选单位Id", type = "Integer")
                                    @PathVariable("companyId") Integer companyId,
-                                   @ApiParam(name = "pageNum", value = "页数", type = "Integer")
-                                   @PathVariable("pageNum") Integer pageNum,
-                                   @ApiParam(name = "pageSize", value = "页面大小", type = "Integer")
-                                   @PathVariable("pageSize") Integer pageSize) {
+                                   @ApiParam(name = "pageNum", value = "页数", type = "Integer", defaultValue = "1")
+                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                   @ApiParam(name = "pageSize", value = "页面大小", type = "Integer", defaultValue = "10")
+                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         if (competitionId == null || competitionId <= 0) {
             return new ResultUtil<>().setErrorMsg(501, "competitionId为空");
         } else if (companyId == null || companyId <= 0) {

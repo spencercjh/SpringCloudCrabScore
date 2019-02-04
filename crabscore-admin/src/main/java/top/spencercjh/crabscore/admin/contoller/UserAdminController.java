@@ -47,15 +47,15 @@ public class UserAdminController {
         }
     }
 
-    @GetMapping(value = "/users/{pageNum}/{pageSize}")
+    @GetMapping(value = "/users")
     @ApiOperation("查询所有用户，只返回状态为启用的用户")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有用户成功"),
             @ApiResponse(code = 201, message = "没有用户")})
     public Result<Object> allUser(@RequestHeader("jwt") String jwt,
-                                  @ApiParam(name = "pageNum", value = "页数", type = "Integer")
-                                  @PathVariable("pageNum") Integer pageNum,
-                                  @ApiParam(name = "pageSize", value = "页面大小", type = "Integer")
-                                  @PathVariable("pageSize") Integer pageSize) {
+                                  @ApiParam(name = "pageNum", value = "页数", type = "Integer", defaultValue = "1")
+                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                  @ApiParam(name = "pageSize", value = "页面大小", type = "Integer", defaultValue = "10")
+                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<User> userList = this.userService.selectAllUser(pageNum, pageSize);
         if (userList.size() == 0) {
             return new ResultUtil<>().setSuccessMsg(201, "没有用户");
@@ -64,16 +64,16 @@ public class UserAdminController {
         }
     }
 
-    @GetMapping(value = "/users/{status}/{pageNum}/{pageSize}")
+    @GetMapping(value = "/users/{status}")
     @ApiOperation("查询所有符合某一状态的用户")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有用户成功"),
             @ApiResponse(code = 201, message = "没有找到可用/禁用用户")})
     public Result<Object> partUser(@ApiParam(name = "status", value = "用户状态 1：可用 0：禁用", type = "Integer")
                                    @PathVariable("status") Integer status,
-                                   @ApiParam(name = "pageNum", value = "页数", type = "Integer")
-                                   @PathVariable("pageNum") Integer pageNum,
-                                   @ApiParam(name = "pageSize", value = "页面大小", type = "Integer")
-                                   @PathVariable("pageSize") Integer pageSize) {
+                                   @ApiParam(name = "pageNum", value = "页数", type = "Integer", defaultValue = "1")
+                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                   @ApiParam(name = "pageSize", value = "页面大小", type = "Integer", defaultValue = "10")
+                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<User> userList = this.userService.selectAllUserSelective(status, pageNum, pageSize);
         if (userList.size() == 0) {
             return new ResultUtil<>().setSuccessMsg(201, "没有找到" +
