@@ -6,7 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.log4j.Log4j2;
 import org.apache.tomcat.util.codec.binary.Base64;
-import top.spencercjh.crabscore.company.common.constant.CommonConstant;
+import top.spencercjh.crabscore.company.common.CommonConstant;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;

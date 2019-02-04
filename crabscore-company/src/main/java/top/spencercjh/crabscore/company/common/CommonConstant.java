@@ -1,4 +1,4 @@
-package top.spencercjh.crabscore.company.common.constant;
+package top.spencercjh.crabscore.company.common;
 
 /**
  * @author spencercjh
