@@ -1,7 +1,7 @@
-#  基于Spring Boot2.x 的REST特色河蟹大赛评比管理系统
+#  基于Spring Cloud 的REST特色河蟹大赛评比管理系统
 
 ## 项目介绍
-基于SpringBoot 2.x和Spring 5.x的SSM框架的Restful Android App服务端
+基于SpringBoot Cloud的Restful Android App服务端
 
 Flask Python 服务端
 
@@ -49,6 +49,10 @@ AES(对称加密算法)
 
 ## 参考 
 [参考项目](https://gitee.com/Exrick/x-boot)
+
+https://www.cnblogs.com/chry/p/7299844.html
+
+https://blog.csdn.net/hellozpc/article/details/83692496#8Ribbon_1636
 
 参考书本：
 
