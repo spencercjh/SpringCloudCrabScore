@@ -7,9 +7,21 @@ Flask Python 服务端
 
 ## 软件架构
 
-Spring Boot 服务端：REST (增POST 删DELETE 改PUT 查GET)
+Java 服务内部：Spring Boot 服务端：REST (增POST 删DELETE 改PUT 查GET)
 
-Python 服务端: 生成Excel文件
+    crabscore-admin 管理员用户组服务
+    
+    crabscore-common 公共部分服务
+    
+    crabscore-company 参选单位用户组服务
+    
+    crabscore-judge 评委用户组服务
+    
+    crabscore-staff 工作人员用户组服务
+    
+    crabscore-eureka-server 服务中心
+
+Python generate-excel 服务端: 生成Excel文件
 
 ——————————————————————
 
@@ -50,9 +62,9 @@ AES(对称加密算法)
 ## 参考 
 [参考项目](https://gitee.com/Exrick/x-boot)
 
-https://www.cnblogs.com/chry/p/7299844.html
+spring cloud:https://blog.csdn.net/hellozpc/article/details/83692496#8Ribbon_1636
 
-https://blog.csdn.net/hellozpc/article/details/83692496#8Ribbon_1636
+zuul:https://blog.csdn.net/qq_33257527/article/details/80038335
 
 参考书本：
 

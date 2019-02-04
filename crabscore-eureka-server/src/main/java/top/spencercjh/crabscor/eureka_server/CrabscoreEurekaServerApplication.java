@@ -14,6 +14,6 @@ public class CrabscoreEurekaServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(CrabscoreEurekaServerApplication.class, args);
     }
-
+    //todo zuul
 }
 
