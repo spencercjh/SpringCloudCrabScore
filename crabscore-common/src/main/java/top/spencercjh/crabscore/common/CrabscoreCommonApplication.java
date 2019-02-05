@@ -23,7 +23,7 @@ public class CrabscoreCommonApplication {
 
     @GetMapping("/")
     public String test() {
-        return "Hello World";
+        return "Hello World Crabscore Common";
     }
 }
 
