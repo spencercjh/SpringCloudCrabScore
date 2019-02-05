@@ -19,7 +19,9 @@ Java 服务内部：Spring Boot 服务端：REST (增POST 删DELETE 改PUT 查GE
     
     crabscore-staff 工作人员用户组服务
     
-    crabscore-eureka-server 服务中心
+    crabscore-eureka-server 服务注册中心
+    
+    crabcore-gateway API网关
 
 Python generate-excel 服务端: 生成Excel文件
 
