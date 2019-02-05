@@ -27,7 +27,7 @@ public class RankController {
         this.groupService = groupService;
     }
 
-    @GetMapping(value = "/fatness/{competitionId}")
+    @GetMapping(value = "/fatness/competition/{competitionId}")
     @ApiOperation(value = "查询金蟹奖成绩", notes = "已在SQL中按照从大到小顺序排列")
     @ApiResponses({@ApiResponse(code = 200, message = "查找所有金蟹奖成绩成功"),
             @ApiResponse(code = 201, message = "没有金蟹奖成绩相关成绩"),
@@ -48,7 +48,7 @@ public class RankController {
         }
     }
 
-    @GetMapping(value = "/qualities/{competitionId}")
+    @GetMapping(value = "/qualities/competition/{competitionId}")
     @ApiOperation(value = "查询种质奖成绩", notes = "已在SQL中按照从大到小顺序排列")
     @ApiResponses({@ApiResponse(code = 200, message = "查找所有种质奖成绩成功"),
             @ApiResponse(code = 201, message = "没有种质奖成绩"),
@@ -69,7 +69,7 @@ public class RankController {
         }
     }
 
-    @GetMapping(value = "/tastes/{competitionId}")
+    @GetMapping(value = "/tastes/competition/{competitionId}")
     @ApiOperation(value = "查询口感奖成绩", notes = "已在SQL中按照从大到小顺序排列")
     @ApiResponses({@ApiResponse(code = 200, message = "查找所有口感奖成绩成功"),
             @ApiResponse(code = 201, message = "没有口感奖成绩"),
