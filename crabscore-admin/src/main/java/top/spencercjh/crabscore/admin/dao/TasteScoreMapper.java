@@ -1,8 +1,8 @@
 package top.spencercjh.crabscore.admin.dao;
 
-import top.spencercjh.crabscore.admin.entity.TasteScore;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import top.spencercjh.crabscore.admin.entity.TasteScore;
 
 import java.util.List;
 
@@ -21,7 +21,8 @@ public interface TasteScoreMapper {
      * @param crabMale
      * @return
      */
-    Float averageTasteScoreByCompetitionIdAndGroupIdAndCrabSex(Integer competitionId, int groupId, int crabMale);
+    Float averageTasteScoreByCompetitionIdAndGroupIdAndCrabSex(@Param("competitionId") Integer competitionId, @Param("groupId") int groupId,
+                                                               @Param("crabSex") int crabMale);
 
     /**
      * 通过大赛Id，小组ID和螃蟹性别来查找某一组某一性别的口感得分标准差
@@ -31,7 +32,8 @@ public interface TasteScoreMapper {
      * @param crabMale
      * @return
      */
-    Float sdTasteScoreByCompetitionIdAndGroupIdAndCrabSex(Integer competitionId, int groupId, int crabMale);
+    Float sdTasteScoreByCompetitionIdAndGroupIdAndCrabSex(@Param("competitionId") Integer competitionId, @Param("groupId") int groupId,
+                                                          @Param("crabSex") int crabMale);
 
     /**
      * 通过大赛Id，小组Id和螃蟹性别来查找口感分数信息

@@ -23,7 +23,6 @@ import java.util.Map;
 @Log4j2
 @RestController
 @Api(description = "公共用户组-大赛公共信息接口")
-@RequestMapping("/api/common")
 public class CommonPropertyController {
     @Value("${qiniu.accessKey}")
     public String accessKey;

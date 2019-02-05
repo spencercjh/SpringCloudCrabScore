@@ -16,7 +16,7 @@ public interface ScoreService {
      * @param username      updateUser
      * @return 事务结果
      */
-    boolean calculateAllFatnessScore(Integer competitionId, String username);
+    void calculateAllFatnessScore(Integer competitionId, String username);
 
     /**
      * 计算并修改某一届大赛所有组的种质评分
@@ -25,7 +25,7 @@ public interface ScoreService {
      * @param username      updateUser
      * @return 事务结果
      */
-    boolean calculateAllQualityScore(Integer competitionId, String username);
+    void calculateAllQualityScore(Integer competitionId, String username);
 
     /**
      * 计算并修改某一节大赛所有组的口感评分
@@ -34,7 +34,7 @@ public interface ScoreService {
      * @param username      updateUser
      * @return 事务结果
      */
-    boolean calculateAllTasteScore(Integer competitionId, String username);
+    void calculateAllTasteScore(Integer competitionId, String username);
 
     /**
      * 获取生成Excel需要的所有数据

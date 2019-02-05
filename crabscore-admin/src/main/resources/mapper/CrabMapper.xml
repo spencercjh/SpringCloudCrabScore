@@ -87,28 +87,28 @@
           and a.group_id = #{groupId,jdbcType=INTEGER}
         order by a.group_id
     </select>
-    <select id="sdFatnessByCompetitionIdAndGroupIdAndCrabSex">
+    <select id="sdFatnessByCompetitionIdAndGroupIdAndCrabSex" resultType="java.lang.Float">
         select STDDEV(crab_fatness)
         from rxpb_crab_info
         where competition_id = #{competitionId,jdbcType=INTEGER}
           and group_id = #{groupId,jdbcType=INTEGER}
           and crab_sex = #{crabSex,jdbcType=INTEGER}
     </select>
-    <select id="sdWeightByCompetitionIdAndGroupIdAndCrabSex">
+    <select id="sdWeightByCompetitionIdAndGroupIdAndCrabSex" resultType="java.lang.Float">
         select STDDEV(crab_weight)
         from rxpb_crab_info
         where competition_id = #{competitionId,jdbcType=INTEGER}
           and group_id = #{groupId,jdbcType=INTEGER}
           and crab_sex = #{crabSex,jdbcType=INTEGER}
     </select>
-    <select id="averageFatnessByCompetitionIdAndGroupIdAndCrabSex">
+    <select id="averageFatnessByCompetitionIdAndGroupIdAndCrabSex" resultType="java.lang.Float">
         select AVG(crab_fatness)
         from rxpb_crab_info
         where competition_id = #{competitionId,jdbcType=INTEGER}
           and group_id = #{groupId,jdbcType=INTEGER}
           and crab_sex = #{crabSex,jdbcType=INTEGER}
     </select>
-    <select id="averageWeightByCompetitionIdAndGroupIdAndCrabSex">
+    <select id="averageWeightByCompetitionIdAndGroupIdAndCrabSex" resultType="java.lang.Float">
         select AVG(crab_weight)
         from rxpb_crab_info
         where competition_id = #{competitionId,jdbcType=INTEGER}

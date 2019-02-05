@@ -18,7 +18,7 @@ import top.spencercjh.crabscore.common.service.GroupService;
 @Log4j2
 @RestController
 @Api(description = "公共用户组-公共三大奖查分接口")
-@RequestMapping("/api/common/score")
+@RequestMapping("/score")
 public class RankController {
     private final GroupService groupService;
 

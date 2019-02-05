@@ -1,6 +1,5 @@
 package top.spencercjh.crabscore.gateway;
 
-import com.alibaba.fastjson.JSON;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.springframework.stereotype.Component;
@@ -61,12 +60,12 @@ public class TokenFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         String token = request.getHeader("jwt");
-        if (token == null || token.isEmpty()) {
+        /*if (token == null || token.isEmpty()) {
             Result result = new ResultUtil<>().setErrorMsg(401, "token is empty");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             ctx.setResponseBody(JSON.toJSONString(result));
-        }
+        }*/
         return null;
     }
 }

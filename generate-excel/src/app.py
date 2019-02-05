@@ -1,20 +1,26 @@
 import json
-import platform
+import os
+import sys
 
-from excel import save_excel_book, sheet_all_company, sheet_rank_fatness, sheet_rank_quality, sheet_rank_taste, sheet_quality_score, \
-    sheet_taste_score, sheet_fatness_score
-from flask import request, Flask, render_template
+from src import create_app
 
-app = Flask(__name__, template_folder='../templates')
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
+
+from flask import request, render_template, Blueprint
+
+excel_service = Blueprint('excel_service', __name__)
+app = create_app()
 
 
 # noinspection PyUnresolvedReferences
-@app.route('/')
+@excel_service.route('/')
 def home():
     return render_template('home.html')
 
 
-@app.route('/generate', methods=['POST'])
+@excel_service.route('/generate', methods=['POST'])
 def get_data():
     if request.method == 'POST':
         rank_fatness = json.loads(request.form['rank_fatness'])
@@ -43,10 +49,3 @@ def get_data():
             female_taste = json.loads(group['female_taste'])
             print(str(female_taste))
         return "generate excel"
-
-
-if __name__ == '__main__':
-    if 'WindowsPE' in platform.architecture():
-        app.run(host="127.0.0.1", port=5000)
-    else:
-        app.run(host="0.0.0.0", port=5000)

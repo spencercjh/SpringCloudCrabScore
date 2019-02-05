@@ -32,7 +32,6 @@ import java.util.Map;
 @Log4j2
 @RestController
 @Api(description = "公共用户组-登录相关接口")
-@RequestMapping("/api/common")
 public class LoginController {
     private final UserService userService;
     private final MessageUtil messageUtil;
