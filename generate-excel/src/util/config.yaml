@@ -1,0 +1,7 @@
+mysql:
+  host: 47.98.114.197
+  port: 3306
+  user: root
+  password: 407031
+  charset: utf8mb4
+  database: rxpbdb

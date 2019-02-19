@@ -1,51 +1,179 @@
-import json
+import logging
 import os
 import sys
 
+import xlwt as xlwt
+
 from src import create_app
+from src.util.config_util import config
 
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
-from flask import request, render_template, Blueprint
+from flask import render_template, Blueprint, jsonify
+
+LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
+              '-35s %(lineno) -5d: %(message)s')
+logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
+LOGGER = logging.getLogger("api")
 
 excel_service = Blueprint('excel_service', __name__)
 app = create_app()
 
 
-# noinspection PyUnresolvedReferences
 @excel_service.route('/')
 def home():
     return render_template('home.html')
 
 
-@excel_service.route('/generate', methods=['POST'])
-def get_data():
-    if request.method == 'POST':
-        rank_fatness = json.loads(request.form['rank_fatness'])
-        print(str(rank_fatness))
-        rank_quality = json.loads(request.form['rank_quality'])
-        print(str(rank_quality))
-        rank_taste = json.loads(request.form['rank_taste'])
-        print(str(rank_taste))
-        all_company = json.loads(request.form['all_company'])
-        print(str(all_company))
-        all_group = json.loads(request.form['all_group'])
-        print(str(all_group))
-        for group in all_group:
-            group_info = json.loads(group['info'])
-            print(str(group_info))
-            male_crab = json.loads(group['male_crab'])
-            print(str(male_crab))
-            female_crab = json.loads(group['female_crab'])
-            print(str(female_crab))
-            male_quality = json.loads(group['male_quality'])
-            print(str(male_quality))
-            female_quality = json.loads(group['female_quality'])
-            print(str(female_quality))
-            male_taste = json.loads(group['male_taste'])
-            print(str(male_taste))
-            female_taste = json.loads(group['female_taste'])
-            print(str(female_taste))
-        return "generate excel"
+@excel_service.route('/generate/<competition_id>', methods=['GET'])
+def generate(competition_id=None):
+    if competition_id is None:
+        return jsonify({
+            "code": 405,
+            "message": "参数错误",
+            "body": {},
+            "status": False
+        })
+    db_data = get_db_data(competition_id)
+    generate_excel(db_data)
+    return jsonify(db_data)
+
+
+def get_db_data(competition_id):
+    rxpbdb = {}
+    cursor = config.get_mysql_cursor()
+    cursor.execute('SELECT * FROM rxpbdb.rxpb_company_info ORDER BY company_id')
+    rxpbdb["all_company"] = cursor.fetchall()
+    cursor.execute('SELECT group_id,'
+                   'a.company_id,'
+                   'company_name,'
+                   'avatar_url,'
+                   'a.competition_id,'
+                   '((quality_score_m + quality_score_f) / 2) AS score,'
+                   'a.create_date,'
+                   'a.create_user,'
+                   'a.update_date,'
+                   'a.update_user '
+                   'FROM rxpb_group_info AS a '
+                   'LEFT JOIN rxpb_company_info AS b '
+                   'ON a.competition_id = b.competition_id '
+                   'AND a.company_id = b.company_id '
+                   'WHERE a.competition_id = %s '
+                   'ORDER BY score DESC '
+                   % str(competition_id))
+    rxpbdb['rank_quality'] = cursor.fetchall()
+    cursor.execute('SELECT group_id,'
+                   'a.company_id,'
+                   'company_name,'
+                   'avatar_url,'
+                   'a.competition_id,'
+                   '((taste_score_m + taste_score_f)/ 2) AS score,'
+                   'a.create_date,'
+                   'a.create_user,'
+                   'a.update_date,'
+                   'a.update_user '
+                   'FROM rxpb_group_info AS a '
+                   'LEFT JOIN rxpb_company_info AS b '
+                   'ON a.competition_id = b.competition_id '
+                   'AND a.company_id = b.company_id '
+                   'WHERE a.competition_id = %s '
+                   'ORDER BY score DESC'
+                   % str(competition_id))
+    rxpbdb['rank_taste'] = cursor.fetchall()
+    cursor.execute('SELECT group_id,'
+                   'a.company_id,'
+                   'company_name,'
+                   'avatar_url,'
+                   'a.competition_id,'
+                   '((fatness_score_m + fatness_score_f)/ 2) AS score,'
+                   'a.create_date,'
+                   'a.create_user,'
+                   'a''.update_date,'
+                   'a.update_user '
+                   'FROM rxpb_group_info AS a '
+                   'LEFT JOIN rxpb_company_info AS b '
+                   'ON a.competition_id = b.competition_id '
+                   'AND a.company_id = b.company_id '
+                   'WHERE a.competition_id = %s '
+                   'ORDER BY score DESC'
+                   % str(competition_id))
+    rxpbdb['rank_fatness'] = cursor.fetchall()
+    cursor.execute('SELECT group_id,'
+                   'a.company_id,'
+                   'b.company_name,'
+                   'b.avatar_url, '
+                   'a.competition_id,'
+                   'fatness_score_m,'
+                   'quality_score_m,'
+                   'taste_score_m, '
+                   'fatness_score_f,'
+                   'quality_score_f, '
+                   'taste_score_f,'
+                   'a.create_date,'
+                   'a.create_user,'
+                   'a.update_date, '
+                   'a.update_user '
+                   'from rxpb_group_info as a '
+                   'LEFT JOIN rxpb_company_info as b '
+                   'ON a.company_id = b.company_id '
+                   'AND a.competition_id = b.competition_id '
+                   'where a.competition_id =%s' % str(competition_id))
+    rxpbdb['all_group'] = cursor.fetchall()
+    cursor.execute('SELECT crab_id, group_id, crab_sex, score_fin '
+                   'FROM rxpb_score_quality '
+                   'GROUP BY group_id, crab_sex, crab_id, score_fin')
+    rxpbdb['quality_score'] = cursor.fetchall()
+    cursor.execute('SELECT crab_id, group_id, crab_sex, score_fin '
+                   'FROM rxpb_score_taste '
+                   'GROUP BY group_id, crab_sex, crab_id, score_fin')
+    rxpbdb['taste_score'] = cursor.fetchall()
+    cursor.execute(
+        'SELECT group_id, crab_id, crab_sex, crab_weight, crab_length, crab_fatness '
+        'FROM rxpb_crab_info '
+        'GROUP BY group_id, crab_sex, crab_id, crab_weight, crab_length,crab_fatness')
+    rxpbdb['fatness_score'] = cursor.fetchall()
+    cursor.close()
+    return rxpbdb
+
+
+def generate_excel(data: dict):
+    if os.path.exists('./test.xls'):
+        os.remove('./test.xls')
+    write_excel = xlwt.Workbook(encoding='utf-8')
+    fatness_score_sheet = write_excel.add_sheet('金蟹奖、优质奖-肥满度')
+    fatness_rank_sheet = write_excel.add_sheet('金蟹奖、优质奖-排序')
+    quality_score_sheet = write_excel.add_sheet('最佳种质奖')
+    quality_rank_sheet = write_excel.add_sheet('最佳种质奖-排序')
+    taste_score_sheet = write_excel.add_sheet('口感奖-专家')
+    taste_rank_sheet = write_excel.add_sheet('口感奖-排序')
+    all_company_sheet = write_excel.add_sheet('参赛单位')
+    row = 0
+    for company in data['all_company']:
+        all_company_sheet.write(row, 0, company['company_id'])
+        all_company_sheet.write(row, 1, company['company_name'])
+        row += 1
+    row = 0
+    for fatness in data['rank_fatness']:
+        fatness_rank_sheet.write(row, 0, '第' + str(fatness['group_id']) + '组')
+        fatness_rank_sheet.write(row, 1, fatness['company_name'])
+        fatness_rank_sheet.write(row, 2, fatness['score'])
+        fatness_rank_sheet.write(row, 3, str(row + 1))
+        row += 1
+    row = 0
+    for quality in data['rank_quality']:
+        quality_rank_sheet.write(row, 0, '第' + str(quality['group_id']) + '组')
+        quality_rank_sheet.write(row, 1, quality['company_name'])
+        quality_rank_sheet.write(row, 2, quality['score'])
+        quality_rank_sheet.write(row, 3, str(row + 1))
+        row += 1
+    row = 0
+    for taste in data['rank_taste']:
+        taste_rank_sheet.write(row, 0, '第' + str(taste['group_id']) + '组')
+        taste_rank_sheet.write(row, 1, taste['company_name'])
+        taste_rank_sheet.write(row, 2, taste['score'])
+        taste_rank_sheet.write(row, 3, str(row + 1))
+        row += 1
+    row = 0
+    write_excel.save('./test.xls')

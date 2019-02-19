@@ -1,5 +1,3 @@
-import datetime
-import json
 import os
 
 import pymysql
@@ -40,22 +38,14 @@ class Config(object):
         host = config['mysql']['host']
         port = config['mysql']['port']
         user = config['mysql']['user']
-        passwd = config['mysql']['passwd']
+        password = config['mysql']['password']
         charset = config['mysql']['charset']
-        conn = pymysql.connect(host=host, port=port, user=user, password=str(passwd), charset=charset)
+        conn = pymysql.connect(host=host, port=port, user=user, password=str(password), charset=charset)
         conn.autocommit(1)
-        cursor = conn.cursor()
+        # 需要列名方便数据处理
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute('use rxpbdb')
         return cursor
 
 
 config = Config()
-
-
-class DateEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime.datetime):
-            return obj.strftime('%Y-%m-%d %H:%M:%S')
-        elif isinstance(obj, datetime.date):
-            return obj.strftime("%Y-%m-%d")
-        else:
-            return json.JSONEncoder.default(self, obj)
