@@ -121,19 +121,23 @@ def get_db_data(competition_id):
                    'AND a.competition_id = b.competition_id '
                    'where a.competition_id =%s' % str(competition_id))
     rxpbdb['all_group'] = cursor.fetchall()
-    cursor.execute('SELECT crab_id, group_id, crab_sex, score_fin '
-                   'FROM rxpb_score_quality '
-                   'GROUP BY group_id, crab_sex, crab_id, score_fin')
-    rxpbdb['quality_score'] = cursor.fetchall()
-    cursor.execute('SELECT crab_id, group_id, crab_sex, score_fin '
-                   'FROM rxpb_score_taste '
-                   'GROUP BY group_id, crab_sex, crab_id, score_fin')
-    rxpbdb['taste_score'] = cursor.fetchall()
-    cursor.execute(
-        'SELECT group_id, crab_id, crab_sex, crab_weight, crab_length, crab_fatness '
-        'FROM rxpb_crab_info '
-        'GROUP BY group_id, crab_sex, crab_id, crab_weight, crab_length,crab_fatness')
-    rxpbdb['fatness_score'] = cursor.fetchall()
+    rxpbdb['quality_score'] = []
+    rxpbdb['taste_score'] = []
+    rxpbdb['fatness_score'] = []
+    for group in rxpbdb['all_group']:
+        cursor.execute('SELECT crab_id, group_id, crab_sex, score_fin '
+                       'FROM rxpb_score_quality '
+                       'WHERE group_id=%s GROUP BY group_id, crab_sex, crab_id, score_fin ' % str(group['group_id']))
+        rxpbdb['quality_score'].append(cursor.fetchall())
+        cursor.execute('SELECT crab_id, group_id, crab_sex, score_fin '
+                       'FROM rxpb_score_taste '
+                       'WHERE group_id=%s GROUP BY group_id, crab_sex, crab_id, score_fin' % str(group['group_id']))
+        rxpbdb['taste_score'].append(cursor.fetchall())
+        cursor.execute(
+            'SELECT group_id, crab_id, crab_sex, crab_weight, crab_length, crab_fatness '
+            'FROM rxpb_crab_info '
+            'WHERE group_id=%s GROUP BY group_id, crab_sex, crab_id, crab_weight,crab_length,crab_fatness' % str(group['group_id']))
+        rxpbdb['fatness_score'].append(cursor.fetchall())
     cursor.close()
     return rxpbdb
 
