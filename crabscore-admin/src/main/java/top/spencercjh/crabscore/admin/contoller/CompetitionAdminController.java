@@ -1,15 +1,15 @@
 package top.spencercjh.crabscore.admin.contoller;
 
+import io.swagger.annotations.*;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import top.spencercjh.crabscore.admin.common.util.ResultUtil;
 import top.spencercjh.crabscore.admin.common.vo.Result;
 import top.spencercjh.crabscore.admin.entity.Competition;
 import top.spencercjh.crabscore.admin.entity.CompetitionConfig;
 import top.spencercjh.crabscore.admin.service.CompetitionConfigService;
 import top.spencercjh.crabscore.admin.service.CompetitionService;
-import io.swagger.annotations.*;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @Api(description = "管理员用户组-大赛后台管理接口")
-@RequestMapping("/competition")
+@RequestMapping(value = "/competition", produces = {"application/json;charset=UTF-8"})
 public class CompetitionAdminController {
     private final CompetitionConfigService competitionConfigService;
     private final CompetitionService competitionService;

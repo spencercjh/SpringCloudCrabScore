@@ -29,7 +29,7 @@ import java.util.List;
 @Log4j2
 @Api(description = "工作人员用户组-工作人员接口")
 @RestController
-@RequestMapping("/api/staff")
+@RequestMapping(value = "/api/staff", produces = {"application/json;charset=UTF-8"})
 public class StaffController {
 
     private final CrabService crabService;

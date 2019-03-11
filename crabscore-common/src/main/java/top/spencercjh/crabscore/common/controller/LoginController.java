@@ -3,6 +3,12 @@ package top.spencercjh.crabscore.common.controller;
 import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import io.swagger.annotations.*;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import top.spencercjh.crabscore.common.common.CommonConstant;
 import top.spencercjh.crabscore.common.common.util.JwtUtil;
 import top.spencercjh.crabscore.common.common.util.MessageUtil;
@@ -12,12 +18,6 @@ import top.spencercjh.crabscore.common.common.vo.Result;
 import top.spencercjh.crabscore.common.entity.User;
 import top.spencercjh.crabscore.common.service.SecurityService;
 import top.spencercjh.crabscore.common.service.UserService;
-import io.swagger.annotations.*;
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Date;
@@ -44,7 +44,7 @@ public class LoginController {
         this.securityService = securityService;
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", produces = {"application/json;charset=UTF-8"})
     @ApiOperation(value = "用户登录,这个接口会在body里返回JWT！！！", notes = "参数检查交给Android端完成")
     @ApiResponses({@ApiResponse(code = 200, message = "登录成功"),
             @ApiResponse(code = 501, message = "用户组参数错误"),
@@ -64,7 +64,7 @@ public class LoginController {
         return this.securityService.login(json, key);
     }
 
-    @PostMapping("/creation")
+    @PostMapping(value = "/creation", produces = {"application/json;charset=UTF-8"})
     @ApiOperation(value = "用户注册", notes = "参数检查交给Android端完成")
     @ApiResponses({@ApiResponse(code = 200, message = "注册成功"),
             @ApiResponse(code = 500, message = "注册失败"),
@@ -87,7 +87,7 @@ public class LoginController {
     }
 
     @SuppressWarnings("Duplicates")
-    @GetMapping("/code")
+    @GetMapping(value = "/code", produces = {"application/json;charset=UTF-8"})
     @ApiOperation(value = "请求发送验证码短信")
     @ApiResponses({@ApiResponse(code = 200, message = "验证码发送成功"),
             @ApiResponse(code = 500, message = "验证码发送失败"),
@@ -111,7 +111,7 @@ public class LoginController {
     }
 
     @SuppressWarnings("Duplicates")
-    @PostMapping("/code")
+    @PostMapping(value = "/code", produces = {"application/json;charset=UTF-8"})
     @ApiOperation(value = "请求校验验证码")
     @ApiResponses({@ApiResponse(code = 200, message = "验证码校验成功"),
             @ApiResponse(code = 501, message = "手机号或验证码格式有误"),
@@ -135,7 +135,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping("/direct")
+    @PostMapping(value = "/direct", produces = {"application/json;charset=UTF-8"})
     @ApiOperation(value = "输入手机号直接登陆或者注册，注册完自动完成登陆，这个接口会在body里返回JWT！！！")
     @ApiResponses({@ApiResponse(code = 200, message = "直接登陆成功（新注册用户）/直接登陆成功（老用户）"),
             @ApiResponse(code = 500, message = "直接登陆失败（新用户注册失败）"),
@@ -177,7 +177,7 @@ public class LoginController {
         }
     }
 
-    @PutMapping("/password")
+    @PutMapping(value = "/password", produces = {"application/json;charset=UTF-8"})
     @ApiResponses({@ApiResponse(code = 200, message = "修改密码成功"),
             @ApiResponse(code = 500, message = "没有对应的用户"),
             @ApiResponse(code = 501, message = "修改密码失败")})

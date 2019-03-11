@@ -25,7 +25,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @Api(description = "参选单位用户组-参选单位查分接口")
-@RequestMapping("/api/company")
+@RequestMapping(value = "/api/company",produces ={"application/json;charset=UTF-8"})
 public class CompanyCheckScoreController {
     private final QualityScoreService qualityScoreService;
     private final TasteScoreService tasteScoreService;

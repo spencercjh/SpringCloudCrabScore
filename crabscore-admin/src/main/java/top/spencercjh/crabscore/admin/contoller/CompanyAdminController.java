@@ -23,7 +23,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @Api(description = "管理员用户组-参选单位后台管理接口")
-@RequestMapping("/company")
+@RequestMapping(value = "/company", produces = {"application/json;charset=UTF-8"})
 public class CompanyAdminController {
     private final CompanyService companyService;
     private final GroupService groupService;

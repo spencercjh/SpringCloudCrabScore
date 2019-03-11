@@ -24,7 +24,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @Api(description = "评委用户组-评委评分接口")
-@RequestMapping("/api/judge")
+@RequestMapping(value = "/api/judge", produces = {"application/json;charset=UTF-8"})
 public class JudgeController {
     private final GroupService groupService;
     private final QualityScoreService qualityScoreService;

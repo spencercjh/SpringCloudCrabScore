@@ -1,5 +1,13 @@
 package top.spencercjh.crabscore.common.controller;
 
+import io.swagger.annotations.*;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import top.spencercjh.crabscore.common.common.util.ResultUtil;
 import top.spencercjh.crabscore.common.common.vo.Result;
 import top.spencercjh.crabscore.common.entity.Competition;
@@ -8,11 +16,6 @@ import top.spencercjh.crabscore.common.entity.User;
 import top.spencercjh.crabscore.common.service.CompetitionConfigService;
 import top.spencercjh.crabscore.common.service.CompetitionService;
 import top.spencercjh.crabscore.common.service.UserService;
-import io.swagger.annotations.*;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,18 +27,15 @@ import java.util.Map;
 @RestController
 @Api(description = "公共用户组-大赛公共信息接口")
 public class CommonPropertyController {
-    @Value("${qiniu.accessKey}")
-    public String accessKey;
-
-    @Value("${qiniu.secretKey}")
-    public String secretKey;
-
-    @Value("${qiniu.bucket}")
-    public String bucket;
-
     private final CompetitionConfigService competitionConfigService;
     private final CompetitionService competitionService;
     private final UserService userService;
+    @Value("${qiniu.accessKey}")
+    public String accessKey;
+    @Value("${qiniu.secretKey}")
+    public String secretKey;
+    @Value("${qiniu.bucket}")
+    public String bucket;
 
     @Autowired
     public CommonPropertyController(CompetitionConfigService competitionConfigService, CompetitionService competitionService, UserService userService) {
@@ -44,7 +44,7 @@ public class CommonPropertyController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/property/competition/present")
+    @GetMapping(value = "/property/competition/present", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查询当前大赛的信息")
     @ApiResponses({@ApiResponse(code = 200, message = "查询当前大赛信息成功"),
             @ApiResponse(code = 500, message = "查询当前大赛信息失败")})
@@ -56,7 +56,7 @@ public class CommonPropertyController {
                 new ResultUtil<>().setErrorMsg("查询当前大赛信息失败");
     }
 
-    @PutMapping(value = "/person/property", consumes = "application/json")
+    @PutMapping(value = "/person/property", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("修改用户资料")
     @ApiImplicitParam(name = "user", value = "单个用户信息", dataType = "User")
     @ApiResponses({@ApiResponse(code = 200, message = "修改用户资料成功"),
@@ -72,7 +72,7 @@ public class CommonPropertyController {
         }
     }
 
-    @GetMapping(value = "/qiniu")
+    @GetMapping(value = "/qiniu", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查询七牛云秘钥")
     @ApiResponses({@ApiResponse(code = 200, message = "查询七牛云信息成功")})
     public Result<Object> getQiNiuProperty() {

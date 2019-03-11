@@ -21,7 +21,7 @@ public class CrabscoreCommonApplication {
         SpringApplication.run(CrabscoreCommonApplication.class, args);
     }
 
-    @GetMapping("/")
+    @GetMapping(value = "/hello", produces = {"application/json;charset=UTF-8"})
     public String test() {
         return "Hello World Crabscore Common";
     }

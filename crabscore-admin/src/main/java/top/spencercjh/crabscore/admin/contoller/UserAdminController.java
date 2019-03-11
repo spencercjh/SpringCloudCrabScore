@@ -22,7 +22,7 @@ import java.util.List;
 @Log4j2
 @RestController
 @Api(description = "管理员用户组-用户后台管理接口")
-@RequestMapping("/user")
+@RequestMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
 public class UserAdminController {
     private final UserService userService;
 
