@@ -1,17 +1,20 @@
 import logging
 import os
 import sys
+import uuid
 
 import xlwt as xlwt
 
-from src import create_app
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
 from src.util.config_util import config
 
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
-from flask import render_template, Blueprint, jsonify
+from flask import render_template, Blueprint, jsonify, request
 
 LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
               '-35s %(lineno) -5d: %(message)s')
@@ -19,7 +22,6 @@ logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
 LOGGER = logging.getLogger("api")
 
 excel_service = Blueprint('excel_service', __name__)
-app = create_app()
 
 
 @excel_service.route('/')
@@ -27,17 +29,19 @@ def home():
     return render_template('home.html')
 
 
-@excel_service.route('/generate/<competition_id>', methods=['GET'])
+@excel_service.route('/generate/<competition_id>', methods=['POST'])
 def generate(competition_id=None):
-    if competition_id is None:
+    if competition_id is None or not competition_id.isdigit():
         return jsonify({
             "code": 405,
             "message": "参数错误",
             "body": {},
             "status": False
         })
+    email = request.values.get("email")
     db_data = get_db_data(competition_id)
-    generate_excel(db_data)
+    file_path = generate_excel(db_data)
+
     return jsonify(db_data)
 
 
@@ -143,8 +147,10 @@ def get_db_data(competition_id):
 
 
 def generate_excel(data: dict):
-    if os.path.exists('./test.xls'):
-        os.remove('./test.xls')
+    file_id = str(uuid.uuid1())
+    file_name = file_id + ".xls"
+    if os.path.exists("./" + file_name):
+        os.remove("./" + file_name)
     write_excel = xlwt.Workbook(encoding='utf-8')
     fatness_score_sheet = write_excel.add_sheet('金蟹奖、优质奖-肥满度')
     fatness_rank_sheet = write_excel.add_sheet('金蟹奖、优质奖-排序')
@@ -180,4 +186,5 @@ def generate_excel(data: dict):
         taste_rank_sheet.write(row, 3, str(row + 1))
         row += 1
     row = 0
-    write_excel.save('./test.xls')
+    write_excel.save("./" + file_name)
+    return "./" + file_name
