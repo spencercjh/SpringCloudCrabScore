@@ -20,8 +20,8 @@ cli = FlaskGroup(create_app=create_app)
 @cli.command()
 def server():
     try:
-        http_server = WSGIServer(('', 5000), app)
-        print("FLASK BEGIN:listening on 5000")
+        http_server = WSGIServer(('', 9000), app)
+        print("FLASK BEGIN:listening on 9000")
         http_server.serve_forever()
     except KeyboardInterrupt:
         print("quit")

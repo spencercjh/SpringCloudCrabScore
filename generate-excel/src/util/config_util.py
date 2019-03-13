@@ -1,7 +1,6 @@
 import os
 
 import pymysql
-import requests
 import yaml
 
 
@@ -15,22 +14,15 @@ class Config(object):
             print(self.conf_path)
             print("config not found")
             exit(1)
-        with open(self.conf_path, 'r') as stream:
+        with open(self.conf_path, 'r', encoding='utf-8') as stream:
             try:
-                return yaml.load(stream)
+                return yaml.load(stream, Loader=yaml.SafeLoader)
             except yaml.YAMLError as exc:
                 print(exc)
                 exit(1)
 
     def set_conf_path(self, conf_path):
         self.conf_path = conf_path
-
-    @staticmethod
-    def sc_ftqq_send_message(text, desp):
-        config = Config().get_config()
-        sc_url = config['sc_url']
-        url = sc_url + "?text=%s" % text + "&desp=%s" % desp
-        return requests.request(method="GET", url=url)
 
     @staticmethod
     def get_mysql_cursor():

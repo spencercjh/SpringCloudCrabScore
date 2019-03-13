@@ -1,41 +1,42 @@
+import logging
+import os
 import smtplib
+import sys
+import traceback
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.utils import formataddr
 
-sender = 'from@runoob.com'
-receivers = ['429240967@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
+from src.util.config_util import config
 
-# 创建一个带附件的实例
-message = MIMEMultipart()
-message['From'] = Header("菜鸟教程", 'utf-8')
-message['To'] = Header("测试", 'utf-8')
-subject = 'Python SMTP 邮件测试'
-message['Subject'] = Header(subject, 'utf-8')
-
-# 邮件正文内容
-message.attach(MIMEText('这是菜鸟教程Python 邮件发送测试……', 'plain', 'utf-8'))
-
-# 构造附件1，传送当前目录下的 test.txt 文件
-att1 = MIMEText(open('test.txt', 'rb').read(), 'base64', 'utf-8')
-att1["Content-Type"] = 'application/octet-stream'
-# 这里的filename可以任意写，写什么名字，邮件中显示什么名字
-att1["Content-Disposition"] = 'attachment; filename="test.txt"'
-message.attach(att1)
-
-# 构造附件2，传送当前目录下的 runoob.txt 文件
-att2 = MIMEText(open('runoob.txt', 'rb').read(), 'base64', 'utf-8')
-att2["Content-Type"] = 'application/octet-stream'
-att2["Content-Disposition"] = 'attachment; filename="runoob.txt"'
-message.attach(att2)
-
-try:
-    smtpObj = smtplib.SMTP('localhost')
-    smtpObj.sendmail(sender, receivers, message.as_string())
-    print("邮件发送成功")
-except smtplib.SMTPException:
-    print("Error: 无法发送邮件")
+config = config.get_config()
+LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
+              '-35s %(lineno) -5d: %(message)s')
+logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
+LOGGER = logging.getLogger("excel")
 
 
-def send_mail(receiver: str, file_path: str):
-    pass
+def send_mail(receiver: str, file_path: str, file_name: str):
+    receivers = [receiver]
+    message = MIMEMultipart()
+    message['From'] = formataddr([config['from'], config['mail_sender']])
+    message['To'] = Header(config['to'], 'utf-8')
+    subject = config['subject']
+    message['Subject'] = Header(subject, 'utf-8')
+    message.attach(MIMEText(config['message'], 'plain', 'utf-8'))
+    attachment = MIMEText(open(file_path, 'rb').read(), 'base64', 'utf-8')
+    attachment["Content-Type"] = 'application/octet-stream'
+    attachment["Content-Disposition"] = 'attachment; filename="%s"' % file_name
+    message.attach(attachment)
+    try:
+        server = smtplib.SMTP_SSL(config['mail_host'], config['mail_port'])
+        server.login(config['mail_user'], config['mail_pass'])
+        server.sendmail(config['mail_sender'], receivers, message.as_string())
+        LOGGER.debug("邮件发送成功")
+    except smtplib.SMTPException:
+        traceback.print_exc()
+        LOGGER.error("Error: 无法发送邮件")

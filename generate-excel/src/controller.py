@@ -1,19 +1,18 @@
 import logging
 import os
+import re
 import sys
+import threading
 import uuid
 
 import xlwt as xlwt
+
+from src.mail import send_mail
 
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 from src.util.config_util import config
-
-curPath = os.path.abspath(os.path.dirname(__file__))
-rootPath = os.path.split(curPath)[0]
-sys.path.append(rootPath)
-
 from flask import render_template, Blueprint, jsonify, request
 
 LOG_FORMAT = ('%(levelname) -10s %(asctime)s %(name) -30s %(funcName) '
@@ -29,20 +28,38 @@ def home():
     return render_template('home.html')
 
 
-@excel_service.route('/generate/<competition_id>', methods=['POST'])
-def generate(competition_id=None):
-    if competition_id is None or not competition_id.isdigit():
+def judge_email(email):
+    patten = re.compile(r"^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$")
+    return re.match(patten, email) is not None
+
+
+@excel_service.route('/generate', methods=['POST'])
+def generate():
+    email = request.values.get("email")
+    competition_id = request.values.get("competition_id")
+    if competition_id is None or not competition_id.isdigit() or email is None or len(email) == 0 or not judge_email(email):
         return jsonify({
             "code": 405,
             "message": "参数错误",
             "body": {},
             "status": False
         })
-    email = request.values.get("email")
-    db_data = get_db_data(competition_id)
-    file_path = generate_excel(db_data)
+    file_id = str(uuid.uuid1())
+    thread = threading.Thread(target=service, args=(competition_id, email, file_id))
+    thread.start()
+    return jsonify({
+        "code": 200,
+        "message": "请求成功",
+        "body": file_id,
+        "status": True
+    })
 
-    return jsonify(db_data)
+
+def service(competition_id, email, file_id):
+    LOGGER.debug("thread start")
+    db_data = get_db_data(competition_id)
+    file_path, file_name = generate_excel(db_data, file_id)
+    send_mail(email, file_path, file_name)
 
 
 def get_db_data(competition_id):
@@ -146,8 +163,7 @@ def get_db_data(competition_id):
     return rxpbdb
 
 
-def generate_excel(data: dict):
-    file_id = str(uuid.uuid1())
+def generate_excel(data: dict, file_id: str):
     file_name = file_id + ".xls"
     if os.path.exists("./" + file_name):
         os.remove("./" + file_name)
@@ -186,5 +202,6 @@ def generate_excel(data: dict):
         taste_rank_sheet.write(row, 3, str(row + 1))
         row += 1
     row = 0
-    write_excel.save("./" + file_name)
-    return "./" + file_name
+    worker_directory = os.path.abspath(os.path.dirname(__file__)) + "/assert/"
+    write_excel.save(worker_directory + file_name)
+    return worker_directory + file_name, file_name

@@ -14,8 +14,8 @@ def create_app(script_info=None):
     # set config
     app.logger.setLevel(logging.INFO)
 
-    from src.app import excel_service
-    app.register_blueprint(excel_service)
+    from src.controller import excel_service
+    app.register_blueprint(excel_service, url_prefix='/')
 
     @app.route('/healthcheck')
     def healthcheck():
