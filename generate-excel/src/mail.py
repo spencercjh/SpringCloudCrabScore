@@ -32,11 +32,13 @@ def send_mail(receiver: str, file_path: str, file_name: str):
     attachment["Content-Type"] = 'application/octet-stream'
     attachment["Content-Disposition"] = 'attachment; filename="%s"' % file_name
     message.attach(attachment)
+    server = smtplib.SMTP_SSL(config['mail_host'], config['mail_port'])
     try:
-        server = smtplib.SMTP_SSL(config['mail_host'], config['mail_port'])
         server.login(config['mail_user'], config['mail_pass'])
         server.sendmail(config['mail_sender'], receivers, message.as_string())
         LOGGER.debug("邮件发送成功")
     except smtplib.SMTPException:
         traceback.print_exc()
         LOGGER.error("Error: 无法发送邮件")
+    finally:
+        server.quit()
