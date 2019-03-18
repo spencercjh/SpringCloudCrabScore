@@ -24,5 +24,10 @@ public class CrabscoreGatewayApplication {
     public String test() {
         return "Hello World Zuul";
     }
+
+    @GetMapping(value = "/", produces = {"application/json;charset=UTF-8"})
+    public String hello() {
+        return "Hello World Zuul";
+    }
 }
 
