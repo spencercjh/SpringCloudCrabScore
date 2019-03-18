@@ -20,8 +20,7 @@ logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT)
 LOGGER = logging.getLogger("excel")
 
 
-def send_mail(receiver: str, file_path: str, file_name: str):
-    receivers = [receiver]
+def send_mail(receivers: list, file_path: str, file_name: str):
     message = MIMEMultipart()
     message['From'] = formataddr([config['from'], config['mail_sender']])
     message['To'] = Header(config['to'], 'utf-8')

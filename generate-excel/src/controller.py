@@ -40,9 +40,8 @@ def judge_email(email):
 
 @excel_service.route('/generate', methods=['POST'])
 def generate():
-    email = request.values.get("email")
     competition_id = request.values.get("competition_id")
-    if competition_id is None or not competition_id.isdigit() or email is None or len(email) == 0 or not judge_email(email):
+    if competition_id is None or not competition_id.isdigit():
         return jsonify({
             "code": 405,
             "message": "参数错误",
@@ -50,7 +49,7 @@ def generate():
             "status": False
         })
     file_id = str(uuid.uuid1())
-    thread = threading.Thread(target=service, args=(competition_id, email, file_id))
+    thread = threading.Thread(target=service, args=(competition_id, file_id))
     thread.start()
     return jsonify({
         "code": 200,
@@ -60,16 +59,22 @@ def generate():
     })
 
 
-def service(competition_id, email, file_id):
+def service(competition_id, file_id):
     LOGGER.debug("thread start")
     db_data = get_db_data(competition_id)
     file_path, file_name = generate_excel(db_data, file_id)
-    send_mail(email, file_path, file_name)
+    send_mail(db_data['admin_emails'], file_path, file_name)
 
 
 def get_db_data(competition_id):
     rxpbdb = {}
     cursor = config.get_mysql_cursor()
+    cursor.execute('SELECT * FROM rxpb_user_info WHERE role_id=1 and status=1')
+    admins = cursor.fetchall()
+    rxpbdb['admin_emails'] = []
+    for admin in admins:
+        if judge_email(admin['email']):
+            rxpbdb['admin_emails'].append(admin['email'])
     cursor.execute('SELECT * FROM rxpbdb.rxpb_company_info ORDER BY company_id')
     rxpbdb["all_company"] = cursor.fetchall()
     cursor.execute('SELECT group_id,'
