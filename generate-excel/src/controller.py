@@ -28,6 +28,11 @@ def home():
     return render_template('home.html')
 
 
+@excel_service.route('/hello')
+def hello():
+    return "Hello World Generate Excel"
+
+
 def judge_email(email):
     patten = re.compile(r"^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$")
     return re.match(patten, email) is not None
