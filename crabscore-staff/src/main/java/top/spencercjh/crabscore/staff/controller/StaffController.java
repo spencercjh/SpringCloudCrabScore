@@ -29,7 +29,6 @@ import java.util.List;
 @Log4j2
 @Api(description = "工作人员用户组-工作人员接口")
 @RestController
-@RequestMapping(value = "/api/staff", produces = {"application/json;charset=UTF-8"})
 public class StaffController {
 
     private final CrabService crabService;
@@ -45,7 +44,7 @@ public class StaffController {
         this.qualityScoreService = qualityScoreService;
     }
 
-    @DeleteMapping("/crab/{crabId}")
+    @DeleteMapping(value = "/crab/{crabId}", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("删除螃蟹信息")
     @ApiResponses({@ApiResponse(code = 200, message = "删除螃蟹信息成功"),
             @ApiResponse(code = 500, message = "删除螃蟹信息失败"),
@@ -61,7 +60,7 @@ public class StaffController {
         }
     }
 
-    @PostMapping(value = "/crab", consumes = "application/json")
+    @PostMapping(value = "/crab", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("插入螃蟹信息")
     @ApiResponses({@ApiResponse(code = 200, message = "插入螃蟹信息成功"),
             @ApiResponse(code = 500, message = "插入螃蟹信息失败"),
@@ -74,7 +73,7 @@ public class StaffController {
 
     }
 
-    @GetMapping("/crabs/{competitionId}/{groupId}/{crabSex}")
+    @GetMapping(value = "/competition/{competitionId}/group/{groupId}/crabSex/{crabSex}/crabs", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查询某一年某一组某一性别的螃蟹信息")
     @ApiResponses({@ApiResponse(code = 200, message = "查询螃蟹信息成功"),
             @ApiResponse(code = 201, message = "crabList为空"),
@@ -106,7 +105,7 @@ public class StaffController {
         }
     }
 
-    @PutMapping(value = "/crab", consumes = "application/json")
+    @PutMapping(value = "/crab", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation(value = "更新螃蟹信息", notes = "这里应该在Android部分就把肥满度算好")
     @ApiResponses({@ApiResponse(code = 200, message = "更新螃蟹信息成功"),
             @ApiResponse(code = 500, message = "更新螃蟹信息失败"),
@@ -121,7 +120,7 @@ public class StaffController {
         }
     }
 
-    @GetMapping("/crab/{label}")
+    @GetMapping(value = "/crab/{label}", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("根据标签查找螃蟹信息")
     @ApiResponses({@ApiResponse(code = 200, message = "查找螃蟹信息成功"),
             @ApiResponse(code = 500, message = "查找螃蟹信息失败"),
@@ -137,7 +136,7 @@ public class StaffController {
         }
     }
 
-    @GetMapping("/groups/{competitionId}")
+    @GetMapping(value = "/competition/{competitionId}/groups", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查看所有比赛组")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有比赛组成功"),
             @ApiResponse(code = 201, message = "groupList为空"),
@@ -160,7 +159,7 @@ public class StaffController {
         }
     }
 
-    @PostMapping(value = "/crabs", consumes = "application/json")
+    @PostMapping(value = "/crabs", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("批量插入螃蟹信息和评分信息")
     @ApiResponses({@ApiResponse(code = 200, message = "批量插入螃蟹信息和评分信息成功"),
             @ApiResponse(code = 500, message = "批量插入螃蟹信息和评分信息失败"),
@@ -185,7 +184,7 @@ public class StaffController {
         }
     }
 
-    @PostMapping(value = "/tastes", consumes = "application/json")
+    @PostMapping(value = "/tastes", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("批量插入口感得分信息")
     @ApiResponses({@ApiResponse(code = 200, message = "批量插入口感得分信息成功"),
             @ApiResponse(code = 500, message = "批量插入口感得分信息失败"),
@@ -206,7 +205,7 @@ public class StaffController {
         }
     }
 
-    @PostMapping(value = "/qualities", consumes = "application/json")
+    @PostMapping(value = "/qualities", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("批量插入种质得分信息")
     @ApiResponses({@ApiResponse(code = 200, message = "批量插入种质得分信息成功"),
             @ApiResponse(code = 500, message = "批量插入种质得分信息失败"),
