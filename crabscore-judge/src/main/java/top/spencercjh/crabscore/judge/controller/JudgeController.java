@@ -24,7 +24,6 @@ import java.util.List;
 @Log4j2
 @RestController
 @Api(description = "评委用户组-评委评分接口")
-@RequestMapping(value = "/api/judge", produces = {"application/json;charset=UTF-8"})
 public class JudgeController {
     private final GroupService groupService;
     private final QualityScoreService qualityScoreService;
@@ -37,7 +36,7 @@ public class JudgeController {
         this.qualityScoreService = qualityScoreService;
     }
 
-    @GetMapping("/groups/{competitionId}")
+    @GetMapping(value = "/competition/{competitionId}/groups", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查看某一年的所有比赛组")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有比赛组成功"),
             @ApiResponse(code = 201, message = "groupList为空"),
@@ -60,7 +59,7 @@ public class JudgeController {
         }
     }
 
-    @GetMapping("/qualities/{competitionId}/{groupId}")
+    @GetMapping(value = "/competition/{competitionId}/group/{groupId}/qualities", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查看某一年的某一组的所有种质得分信息")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有种质得分信息成功"),
             @ApiResponse(code = 201, message = "qualityScoreList为空"),
@@ -89,7 +88,7 @@ public class JudgeController {
         }
     }
 
-    @GetMapping("/tastes/{competitionId}/{groupId}")
+    @GetMapping(value = "/competition/{competitionId}/group/{groupId}/tastes", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("查看某一年的某一组的所有口感得分信息")
     @ApiResponses({@ApiResponse(code = 200, message = "查询所有口感得分信息成功"),
             @ApiResponse(code = 201, message = "tasteScoreList为空"),
@@ -118,7 +117,7 @@ public class JudgeController {
         }
     }
 
-    @PostMapping(value = "/quality", consumes = "application/json")
+    @PostMapping(value = "/quality", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("插入种质成绩信息")
     @ApiResponses({@ApiResponse(code = 200, message = "插入种质成绩信息成功"),
             @ApiResponse(code = 500, message = "插入种质成绩信息失败"),
@@ -133,7 +132,7 @@ public class JudgeController {
         }
     }
 
-    @PostMapping(value = "/taste", consumes = "application/json")
+    @PostMapping(value = "/taste", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("插入口感成绩信息")
     @ApiResponses({@ApiResponse(code = 200, message = "插入种质成绩信息成功"),
             @ApiResponse(code = 500, message = "插入种质成绩信息失败"),
@@ -148,7 +147,7 @@ public class JudgeController {
         }
     }
 
-    @PutMapping(value = "/quality", consumes = "application/json")
+    @PutMapping(value = "/quality", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("更新种质成绩信息")
     @ApiResponses({@ApiResponse(code = 200, message = "修改种质成绩信息成功"),
             @ApiResponse(code = 500, message = "修改种质成绩信息失败"),
@@ -164,7 +163,7 @@ public class JudgeController {
         }
     }
 
-    @PutMapping(value = "/taste", consumes = "application/json")
+    @PutMapping(value = "/taste", consumes = "application/json", produces = {"application/json;charset=UTF-8"})
     @ApiOperation("更新口感成绩信息")
     @ApiResponses({@ApiResponse(code = 200, message = "修改口感成绩信息成功"),
             @ApiResponse(code = 500, message = "修改口感成绩信息失败"),
