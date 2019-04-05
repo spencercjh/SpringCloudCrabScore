@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-03-11 22:15:41
+Date: 2019-04-02 13:47:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `rxpb_company_info` (
 -- ----------------------------
 -- Records of rxpb_company_info
 -- ----------------------------
-INSERT INTO `rxpb_company_info` VALUES ('1', '昆山常氏蟹业有限公司', '1', 'http://spencercjh.top/timg.jpg', '2018-02-10 00:00:00', 'admin', '2018-02-10 00:00:00', 'admin');
+INSERT INTO `rxpb_company_info` VALUES ('1', '昆山常氏蟹业有限公司', '1', 'http://spencercjh.top/timg.jpg', '2018-02-09 12:00:00', 'admin', '2019-03-20 10:05:29', 'admin');
 INSERT INTO `rxpb_company_info` VALUES ('2', '昆山淀山湖永兴虾蟹养殖农民专业合作社', '1', 'http://spencercjh.top/timg.jpg', '2018-02-11 00:00:00', 'admin', '2018-02-11 00:00:00', 'admin');
 INSERT INTO `rxpb_company_info` VALUES ('3', '安庆市皖宜季牛水产养殖有限责任公司 ', '1', 'http://spencercjh.top/timg.jpg', '2018-02-12 00:00:00', 'admin', '2018-02-12 00:00:00', 'admin');
 INSERT INTO `rxpb_company_info` VALUES ('4', '安徽省五河县大杨湖水产养殖有限公司', '1', 'http://spencercjh.top/timg.jpg', '2018-02-13 00:00:00', 'admin', '2018-02-13 00:00:00', 'admin');
@@ -138,7 +138,7 @@ CREATE TABLE `rxpb_competition_info` (
 -- ----------------------------
 -- Records of rxpb_competition_info
 -- ----------------------------
-INSERT INTO `rxpb_competition_info` VALUES ('1', '2017', '0.9', '1', '0.09', '0.1', '0.1', '0.09', '0.1', '0.1', '1', '1', '1', null, '1', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', '2017-01-01 00:00:00', 'manual', '2017-01-01 00:00:00', 'manual');
+INSERT INTO `rxpb_competition_info` VALUES ('1', '2019', '0.5', '1', '0.09', '0.1', '0.1', '0.09', '0.1', '0.1', '1', '1', '1', '请输入大赛备注信息', '1', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', '2016-12-31 12:00:00', 'manual', '2016-12-31 12:00:00', 'manual');
 
 -- ----------------------------
 -- Table structure for `rxpb_crab_info`
@@ -159,7 +159,7 @@ CREATE TABLE `rxpb_crab_info` (
   `update_user` varchar(45) NOT NULL DEFAULT 'admin' COMMENT '数据更新用户',
   `competition_id` int(11) NOT NULL DEFAULT '1' COMMENT '比赛ID',
   PRIMARY KEY (`crab_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8 COMMENT='蟹基本信息表,肥满度表';
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 COMMENT='蟹基本信息表,肥满度表';
 
 -- ----------------------------
 -- Records of rxpb_crab_info
@@ -184,6 +184,20 @@ INSERT INTO `rxpb_crab_info` VALUES ('168', '1', '0', '11109', '192.2', '6.58', 
 INSERT INTO `rxpb_crab_info` VALUES ('169', '1', '1', '11117', '269.7', '7.01', '70.4643', '2019-02-06 02:46:17', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'admin', '2019-02-06 02:46:17', 'admin', '1');
 INSERT INTO `rxpb_crab_info` VALUES ('170', '1', '1', '11118\r\n', '260.2', '6.94', '70.0602', '2019-02-06 02:46:18', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'admin', '2019-02-06 02:46:18', 'admin', '1');
 INSERT INTO `rxpb_crab_info` VALUES ('171', '1', '1', '11119', '275.4', '7.04', '71.0376', '2019-02-06 02:46:18', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'admin', '2019-02-06 02:46:18', 'admin', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('172', '2', '0', '12200', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('173', '2', '0', '12201', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('174', '2', '0', '12202', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('175', '2', '0', '12203', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('176', '2', '0', '12204', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('177', '2', '0', '12205', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('178', '2', '0', '12206', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('179', '2', '1', '12210', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('180', '2', '1', '12211', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('181', '2', '1', '12212', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('182', '2', '1', '12213', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('183', '2', '1', '12214', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('184', '2', '1', '12215', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
+INSERT INTO `rxpb_crab_info` VALUES ('185', '2', '1', '12216', null, null, null, '2019-03-19 09:51:21', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg', 'staff', '2019-03-19 09:51:21', 'staff', '1');
 
 -- ----------------------------
 -- Table structure for `rxpb_group_info`
@@ -209,7 +223,7 @@ CREATE TABLE `rxpb_group_info` (
 -- ----------------------------
 -- Records of rxpb_group_info
 -- ----------------------------
-INSERT INTO `rxpb_group_info` VALUES ('1', '1', '1', '91.1209', '89.8', '81.8', '77.269', '86.8', '84', '2018-02-10 00:00:00', 'admin', '2019-03-11 16:11:54', 'admin');
+INSERT INTO `rxpb_group_info` VALUES ('1', '1', '1', '91.1209', '89.8', '81.8', '77.269', '86.8', '84', '2018-02-10 00:00:00', 'admin', '2019-03-20 09:48:51', 'admin');
 INSERT INTO `rxpb_group_info` VALUES ('2', '2', '1', '87.4878', '88.2', '82.9', '87.4878', '88.2', '82.9', '2018-02-11 00:00:00', 'admin', '2018-02-11 00:00:00', 'admin');
 INSERT INTO `rxpb_group_info` VALUES ('3', '3', '1', '86.4716', '91.4', '84.1', '86.4716', '91.4', '84.1', '2018-02-12 00:00:00', 'admin', '2018-02-12 00:00:00', 'admin');
 INSERT INTO `rxpb_group_info` VALUES ('4', '4', '1', '84.0597', '90.1', '0', '84.0597', '90.1', '0', '2018-02-13 00:00:00', 'admin', '2018-02-13 00:00:00', 'admin');
@@ -306,7 +320,7 @@ CREATE TABLE `rxpb_score_quality` (
   `update_user` varchar(45) NOT NULL DEFAULT 'admin' COMMENT '数据更新用户',
   `competition_id` int(11) NOT NULL DEFAULT '1' COMMENT '比赛ID',
   PRIMARY KEY (`score_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='种质评分表';
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COMMENT='种质评分表';
 
 -- ----------------------------
 -- Records of rxpb_score_quality
@@ -325,6 +339,20 @@ INSERT INTO `rxpb_score_quality` VALUES ('54', '159', '1', '1', null, '92', null
 INSERT INTO `rxpb_score_quality` VALUES ('55', '160', '1', '1', null, '92', null, null, null, null, null, '2019-01-12 15:12:44', 'staff', '2019-01-12 15:12:44', 'staff', '1');
 INSERT INTO `rxpb_score_quality` VALUES ('56', '161', '1', '1', null, '90', null, null, null, null, null, '2019-01-12 15:12:44', 'staff', '2019-01-12 15:12:44', 'staff', '1');
 INSERT INTO `rxpb_score_quality` VALUES ('57', '162', '1', '1', null, '85', null, null, null, null, null, '2019-01-12 15:12:44', 'staff', '2019-01-12 15:12:44', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('61', '172', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:24', 'staff', '2019-03-19 09:51:24', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('62', '173', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:27', 'staff', '2019-03-19 09:51:27', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('63', '174', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:31', 'staff', '2019-03-19 09:51:31', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('64', '175', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:33', 'staff', '2019-03-19 09:51:33', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('65', '176', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:37', 'staff', '2019-03-19 09:51:37', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('66', '177', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:40', 'staff', '2019-03-19 09:51:40', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('67', '178', '2', '0', null, null, null, null, null, null, null, '2019-03-19 09:51:42', 'staff', '2019-03-19 09:51:42', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('68', '179', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:51:45', 'staff', '2019-03-19 09:51:45', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('69', '180', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:51:48', 'staff', '2019-03-19 09:51:48', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('70', '181', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:51:50', 'staff', '2019-03-19 09:51:50', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('71', '182', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:51:52', 'staff', '2019-03-19 09:51:52', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('72', '183', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:51:55', 'staff', '2019-03-19 09:51:55', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('73', '184', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:51:58', 'staff', '2019-03-19 09:51:58', 'staff', '1');
+INSERT INTO `rxpb_score_quality` VALUES ('74', '185', '2', '1', null, null, null, null, null, null, null, '2019-03-19 09:52:00', 'staff', '2019-03-19 09:52:00', 'staff', '1');
 
 -- ----------------------------
 -- Table structure for `rxpb_score_taste`
@@ -350,7 +378,7 @@ CREATE TABLE `rxpb_score_taste` (
   `competition_id` int(11) NOT NULL DEFAULT '1' COMMENT '比赛ID',
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`score_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=sjis COMMENT='口感奖评分表';
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=sjis COMMENT='口感奖评分表';
 
 -- ----------------------------
 -- Records of rxpb_score_taste
@@ -369,6 +397,20 @@ INSERT INTO `rxpb_score_taste` VALUES ('54', '159', '1', '1', '92', null, null, 
 INSERT INTO `rxpb_score_taste` VALUES ('55', '160', '1', '1', '82', null, null, null, null, null, null, null, '2019-01-12 15:12:44', 'staff', '2019-01-12 15:12:44', 'staff', '1', null);
 INSERT INTO `rxpb_score_taste` VALUES ('56', '161', '1', '1', '77', null, null, null, null, null, null, null, '2019-01-12 15:12:44', 'staff', '2019-01-12 15:12:44', 'staff', '1', null);
 INSERT INTO `rxpb_score_taste` VALUES ('57', '162', '1', '1', '68', null, null, null, null, null, null, null, '2019-01-12 15:12:44', 'staff', '2019-01-12 15:12:44', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('61', '172', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:23', 'staff', '2019-03-19 09:51:23', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('62', '173', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:27', 'staff', '2019-03-19 09:51:27', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('63', '174', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:30', 'staff', '2019-03-19 09:51:30', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('64', '175', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:32', 'staff', '2019-03-19 09:51:32', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('65', '176', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:37', 'staff', '2019-03-19 09:51:37', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('66', '177', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:39', 'staff', '2019-03-19 09:51:39', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('67', '178', '0', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:42', 'staff', '2019-03-19 09:51:42', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('68', '179', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:44', 'staff', '2019-03-19 09:51:44', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('69', '180', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:47', 'staff', '2019-03-19 09:51:47', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('70', '181', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:49', 'staff', '2019-03-19 09:51:49', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('71', '182', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:52', 'staff', '2019-03-19 09:51:52', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('72', '183', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:54', 'staff', '2019-03-19 09:51:54', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('73', '184', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:51:57', 'staff', '2019-03-19 09:51:57', 'staff', '1', null);
+INSERT INTO `rxpb_score_taste` VALUES ('74', '185', '1', '2', null, null, null, null, null, null, null, null, '2019-03-19 09:52:00', 'staff', '2019-03-19 09:52:00', 'staff', '1', null);
 
 -- ----------------------------
 -- Table structure for `rxpb_user_info`
@@ -395,15 +437,15 @@ CREATE TABLE `rxpb_user_info` (
 -- ----------------------------
 -- Records of rxpb_user_info
 -- ----------------------------
-INSERT INTO `rxpb_user_info` VALUES ('1', null, 'admin', '827CCB0EEA8A706C4C34A16891F84E7B', '管理员1', '1', '1', '15000131965', '1', '2017-01-01 12:00:00', 'manual', '2019-02-05 05:47:26', 'admin1', 'http://spencercjh.top/4afc5e42-bb2f-456d-ab4a-77e2249ede47');
+INSERT INTO `rxpb_user_info` VALUES ('1', null, 'admin123', '827CCB0EEA8A706C4C34A16891F84E7B', '蔡佳昊', '1', '1', '864712437@qq.com', '1', '2017-01-01 12:00:00', 'manual', '2019-03-20 10:06:04', 'admin123', 'http://spencercjh.top/75d7055f-0979-4bad-8a95-81d508b32718');
 INSERT INTO `rxpb_user_info` VALUES ('2', null, 'judge', '827CCB0EEA8A706C4C34A16891F84E7B', '评委1', '2', '1', '15000131965', '1', '2018-12-22 23:42:57', 'manual', '2018-12-22 23:42:57', 'manual', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
-INSERT INTO `rxpb_user_info` VALUES ('3', null, 'staff', '827CCB0EEA8A706C4C34A16891F84E7B', '工作人员1', '3', '1', '15000131965', '1', '2018-12-22 23:49:34', 'manual', '2018-12-22 23:49:34', 'manual', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
-INSERT INTO `rxpb_user_info` VALUES ('4', null, 'company', '827CCB0EEA8A706C4C34A16891F84E7B', '参选单位1', '4', '1', '15000131965', '1', '2018-12-22 23:50:29', 'admin', '2018-12-22 23:50:29', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
-INSERT INTO `rxpb_user_info` VALUES ('5', null, '15000131965', '827CCB0EEA8A706C4C34A16891F84E7B', '用户15000131965', '4', '0', '15000131965', '1', '2018-12-23 01:09:44', '15000131965', '2018-12-23 01:09:44', '15000131965', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
+INSERT INTO `rxpb_user_info` VALUES ('3', null, 'staff', '827CCB0EEA8A706C4C34A16891F84E7B', '工作人员1', '3', '1', '15000131965', '1', '2018-12-22 11:49:34', 'manual', '2018-12-22 11:49:34', 'manual', 'http://spencercjh.top/150413eb-693e-4147-bd70-d4753a1fef40');
+INSERT INTO `rxpb_user_info` VALUES ('4', '1', 'company', '827CCB0EEA8A706C4C34A16891F84E7B', '参选单位1', '4', '0', '15000131965', '1', '2018-12-22 11:50:29', 'admin', '2019-03-20 10:03:13', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
+INSERT INTO `rxpb_user_info` VALUES ('5', null, '15000131965', '827CCB0EEA8A706C4C34A16891F84E7B', '用户15000131965', '4', '0', '15000131965', '1', '2018-12-22 13:09:44', '15000131965', '2019-03-20 10:03:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
 INSERT INTO `rxpb_user_info` VALUES ('6', '1', 'comany1', '827CCB0EEA8A706C4C34A16891F84E7B', '昆山常氏蟹业有限公司', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
 INSERT INTO `rxpb_user_info` VALUES ('7', '2', 'comany2', '827CCB0EEA8A706C4C34A16891F84E7B', '昆山淀山湖永兴虾蟹养殖农民专业合作社', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
-INSERT INTO `rxpb_user_info` VALUES ('8', '3', 'company3', '827CCB0EEA8A706C4C34A16891F84E7B', '安庆市皖宜季牛水产养殖有限责任公司 ', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
-INSERT INTO `rxpb_user_info` VALUES ('9', '4', 'company4', '827CCB0EEA8A706C4C34A16891F84E7B', '安徽省五河县大杨湖水产养殖有限公司', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
+INSERT INTO `rxpb_user_info` VALUES ('8', '3', 'company3', '827CCB0EEA8A706C4C34A16891F84E7B', '安庆市皖宜季牛水产养殖有限责任公司 ', '4', '0', '15000131965', '1', '2018-12-29 13:06:15', 'admin', '2019-03-20 10:05:10', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
+INSERT INTO `rxpb_user_info` VALUES ('9', '4', 'company4', '827CCB0EEA8A706C4C34A16891F84E7B', '安徽省五河县大杨湖水产养殖有限公司', '4', '0', '15000131965', '1', '2018-12-29 13:06:15', 'admin', '2019-03-20 10:05:13', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
 INSERT INTO `rxpb_user_info` VALUES ('10', '5', 'company5', '827CCB0EEA8A706C4C34A16891F84E7B', '霍邱县城东湖生态水产养殖有限公司', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
 INSERT INTO `rxpb_user_info` VALUES ('11', '6', 'company6', '827CCB0EEA8A706C4C34A16891F84E7B', '江苏省盐城市陈长荣大纵湖大闸蟹有限公司', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
 INSERT INTO `rxpb_user_info` VALUES ('12', '7', 'company7', '827CCB0EEA8A706C4C34A16891F84E7B', '江苏水景园蟹业有限公司', '4', '1', '15000131965', '1', '2018-12-30 01:06:15', 'admin', '2018-12-30 01:06:15', 'admin', 'http://spencercjh.top/%E4%B8%8A%E6%B5%B7%E6%B5%B7%E6%B4%8B%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%BE%BD.jpg');
