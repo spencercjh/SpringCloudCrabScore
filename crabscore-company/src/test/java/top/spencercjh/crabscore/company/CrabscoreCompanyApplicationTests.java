@@ -16,15 +16,4 @@ public class CrabscoreCompanyApplicationTests {
     @Test
     public void contextLoads() {
     }
-
-
-    @Test
-    public void testJasypt() {
-        String password = "spencercjh";
-        System.out.println("url:\t" + JasyptUtil.encryptPwd(password, "jdbc:mysql://193.112.35.66:3306"));
-        System.out.println("root:\t" + JasyptUtil.encryptPwd(password, "root"));
-        System.out.println("key:\t" + JasyptUtil.encryptPwd(password, "407031"));
-
-    }
 }
-
